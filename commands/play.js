@@ -39,7 +39,10 @@ module.exports = class extends SlashCommand {
             if (!searchResult || !searchResult.tracks.length) return void ctx.sendFollowUp({ content: "No results were found!" });
 
         const queue = await client.player.createQueue(guild, {
-            metadata: channel
+            metadata: channel,
+
+            leaveOnEmpty: true,
+            leaveOnEmptyCooldown: process.env.LEAVE_COOLDOWN ?? 1000,
         });
 
         const member = guild.members.cache.get(ctx.user.id) ?? await guild.members.fetch(ctx.user.id);
