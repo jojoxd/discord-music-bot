@@ -41,6 +41,8 @@ module.exports = class extends SlashCommand {
         const queue = await client.player.createQueue(guild, {
             metadata: channel,
 
+            leaveOnEnd: false,
+            leaveOnStop: true,
             leaveOnEmpty: true,
             leaveOnEmptyCooldown: process.env.LEAVE_COOLDOWN ?? 1000,
         });
